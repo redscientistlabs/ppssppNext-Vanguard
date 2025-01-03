@@ -65,6 +65,8 @@
 #include "GPU/GPUInterface.h"
 #include "Common/Data/Text/I18n.h"
 
+#include "Windows/Vanguard/VanguardClientInitializer.h" // RTC_Hijack
+
 #if PPSSPP_PLATFORM(IOS) || PPSSPP_PLATFORM(MAC)
 #include "UI/DarwinFileSystemServices.h" // For the browser
 #endif
@@ -1094,6 +1096,8 @@ void MainScreen::CreateViews() {
 	// Back button to the bottom left.
 	// Scrolling action menu to the right.
 	using namespace UI;
+
+	VanguardClientInitializer::win = this; // RTC_Hijack
 
 	bool vertical = UseVerticalLayout();
 

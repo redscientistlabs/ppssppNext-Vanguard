@@ -45,6 +45,8 @@
 #include "GPU/Debugger/Stepping.h"
 #include "Core/MIPS/MIPSTracer.h"
 
+#include "Windows/Vanguard/VanguardHelpers.h" // RTC_Hijack
+
 #ifdef _WIN32
 #include "Common/CommonWindows.h"
 #include "Windows/InputDevice.h"
@@ -222,6 +224,10 @@ void Core_RunLoop(GraphicsContext *ctx) {
 		sleep_ms(16);
 		return;
 	}
+
+	// RTC_Hijack: call Vanguard function
+	if (VanguardClient::ok_to_corestep)
+		CallImportedFunction<void>((char*)"CORESTEP");
 
 	NativeFrame(ctx);
 }

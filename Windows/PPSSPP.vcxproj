@@ -39,7 +39,7 @@
     <RootNamespace>DaSh</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>PPSSPPWindows</ProjectName>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -145,7 +145,7 @@
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\output</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(Platform)\$(Configuration)\</IntDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">$(Platform)\$(Configuration)\</IntDir>
@@ -906,6 +906,7 @@
     <ClCompile Include="RawInput.cpp" />
     <ClCompile Include="TouchInputHandler.cpp" />
     <ClCompile Include="GPU\WindowsVulkanContext.cpp" />
+    <ClCompile Include="Vanguard\VanguardHelpers.cpp" />
     <ClCompile Include="W32Util\ContextMenu.cpp" />
     <ClCompile Include="W32Util\DarkMode.cpp" />
     <ClCompile Include="W32Util\DialogManager.cpp" />
@@ -1460,6 +1461,8 @@
     <ClInclude Include="RawInput.h" />
     <ClInclude Include="TouchInputHandler.h" />
     <ClInclude Include="GPU\WindowsVulkanContext.h" />
+    <ClInclude Include="Vanguard\VanguardClientInitializer.h" />
+    <ClInclude Include="Vanguard\VanguardHelpers.h" />
     <ClInclude Include="W32Util\ContextMenu.h" />
     <ClInclude Include="W32Util\DarkMode.h" />
     <ClInclude Include="W32Util\DialogManager.h" />
@@ -1701,6 +1704,7 @@
     <None Include="ppsspp.ico" />
     <None Include="icon1.ico" />
     <None Include="stop1.ico" />
+    <None Include="Vanguard\VanguardSpec.json" />
     <None Include="zipup.cmd" />
   </ItemGroup>
   <ItemGroup>

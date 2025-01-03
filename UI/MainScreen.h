@@ -132,11 +132,15 @@ public:
 
 	bool key(const KeyInput &touch) override;
 
+	// RTC_Hijack: move to public
+	void sendMessage(UIMessage message, const char* value) override;
+
 protected:
 	void CreateViews() override;
 	void DrawBackground(UIContext &dc) override;
 	void update() override;
-	void sendMessage(UIMessage message, const char *value) override;
+	// RTC_Hijack: move to public
+	//void sendMessage(UIMessage message, const char *value) override;
 	void dialogFinished(const Screen *dialog, DialogResult result) override;
 
 	bool DrawBackgroundFor(UIContext &dc, const Path &gamePath, float progress);

@@ -96,6 +96,9 @@ using namespace std::placeholders;
 
 #include "Core/Reporting.h"
 
+#include "Windows/Vanguard/VanguardClientInitializer.h" // RTC_Hijack
+#include "Windows/Vanguard/VanguardHelpers.h" // RTC_Hijack
+
 #if PPSSPP_PLATFORM(WINDOWS) && !PPSSPP_PLATFORM(UWP)
 #include "Windows/MainWindow.h"
 #endif
@@ -277,6 +280,9 @@ void EmuScreen::bootGame(const Path &filename) {
 		return;
 	}
 
+	// RTC_Hijack: call Vanguard function
+	CallImportedFunction<void>((char*)"LOADGAMESTART", filename.c_str());
+
 	auto sc = GetI18NCategory(I18NCat::SCREEN);
 	if (info->fileType == IdentifiedFileType::PSP_DISC_DIRECTORY) {
 		// Check for existence of ppsspp-index.lst - if it exists, the user likely knows what they're doing.
@@ -435,6 +441,10 @@ void EmuScreen::bootComplete() {
 
 	std::string gameID = g_paramSFO.GetValueString("DISC_ID");
 	g_Config.TimeTracker().Start(gameID);
+
+	// RTC_Hijack: call Vanguard function
+	std::string gamePath = PSP_CoreParameter().fileToStart.GetFilename();
+	CallImportedFunction<void>((char*)"LOADGAMEDONE", gamePath);
 }
 
 EmuScreen::~EmuScreen() {
@@ -1019,6 +1029,8 @@ static UI::AnchorLayoutParams *AnchorInCorner(const Bounds &bounds, int corner, 
 
 void EmuScreen::CreateViews() {
 	using namespace UI;
+
+	VanguardClientInitializer::winEmu = this; // RTC_Hijack
 
 	auto di = GetI18NCategory(I18NCat::DIALOG);
 	auto dev = GetI18NCategory(I18NCat::DEVELOPER);

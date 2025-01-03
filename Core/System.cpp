@@ -74,6 +74,8 @@
 #include "GPU/Debugger/RecordFormat.h"
 #include "Core/RetroAchievements.h"
 
+#include "Windows/Vanguard/VanguardHelpers.h" // RTC_Hijack
+
 enum CPUThreadState {
 	CPU_THREAD_NOT_RUNNING,
 	CPU_THREAD_PENDING,
@@ -579,6 +581,11 @@ void PSP_Shutdown() {
 	pspIsQuitting = false;
 	g_Config.unloadGameConfig();
 	Core_NotifyLifecycle(CoreLifecycle::STOPPED);
+
+	//RTC_Hijack: call Vanguard function
+	//Make sure we don't send it if we're shutting the emulator down, otherwise it will hang
+	if(coreState != CORE_POWERDOWN)
+		CallImportedFunction<void>((char*)"GAMECLOSED");
 }
 
 bool PSP_Reboot(std::string *error_string) {

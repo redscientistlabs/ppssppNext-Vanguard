@@ -206,7 +206,7 @@ static const ConfigSetting generalSettings[] = {
 	ConfigSetting("IgnoreBadMemAccess", &g_Config.bIgnoreBadMemAccess, true, CfgFlag::DEFAULT),
 	ConfigSetting("CurrentDirectory", &g_Config.currentDirectory, "", CfgFlag::DEFAULT),
 	ConfigSetting("ShowDebuggerOnLoad", &g_Config.bShowDebuggerOnLoad, false, CfgFlag::DEFAULT),
-	ConfigSetting("CheckForNewVersion", &g_Config.bCheckForNewVersion, true, CfgFlag::DEFAULT),
+	ConfigSetting("CheckForNewVersion", &g_Config.bCheckForNewVersion, false, CfgFlag::DEFAULT), // RTC_Hijack: changed to disabled
 	ConfigSetting("Language", &g_Config.sLanguageIni, &DefaultLangRegion, CfgFlag::DEFAULT),
 	ConfigSetting("ForceLagSync2", &g_Config.bForceLagSync, false, CfgFlag::PER_GAME),
 	ConfigSetting("DiscordPresence", &g_Config.bDiscordPresence, true, CfgFlag::DEFAULT),  // Or maybe it makes sense to have it per-game? Race conditions abound...
@@ -260,7 +260,7 @@ static const ConfigSetting generalSettings[] = {
 	// "default" means let emulator decide, "" means disable.
 	ConfigSetting("ReportingHost", &g_Config.sReportHost, "default", CfgFlag::DEFAULT),
 	ConfigSetting("AutoSaveSymbolMap", &g_Config.bAutoSaveSymbolMap, false, CfgFlag::PER_GAME),
-	ConfigSetting("CacheFullIsoInRam", &g_Config.bCacheFullIsoInRam, false, CfgFlag::PER_GAME),
+	ConfigSetting("CacheFullIsoInRam", &g_Config.bCacheFullIsoInRam, true, CfgFlag::DEFAULT), // RTC_Hijack: changed to default to true
 	ConfigSetting("RemoteISOPort", &g_Config.iRemoteISOPort, 0, CfgFlag::DEFAULT),
 	ConfigSetting("LastRemoteISOServer", &g_Config.sLastRemoteISOServer, "", CfgFlag::DEFAULT),
 	ConfigSetting("LastRemoteISOPort", &g_Config.iLastRemoteISOPort, 0, CfgFlag::DEFAULT),

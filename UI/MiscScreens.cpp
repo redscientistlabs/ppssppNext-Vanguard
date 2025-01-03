@@ -741,6 +741,7 @@ void LogoScreen::touch(const TouchInput &touch) {
 }
 
 void LogoScreen::DrawForeground(UIContext &dc) {
+	/*
 	using namespace Draw;
 
 	const Bounds &bounds = dc.GetBounds();
@@ -789,6 +790,8 @@ void LogoScreen::DrawForeground(UIContext &dc) {
 #endif
 
 	dc.Flush();
+	*/
+	Next();
 }
 
 void CreditsScreen::CreateViews() {

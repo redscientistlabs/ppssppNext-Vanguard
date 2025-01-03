@@ -57,6 +57,7 @@ public:
 	// We also need to do some special handling of queued UI events to handle closing the chat window.
 	bool key(const KeyInput &key) override;
 
+
 protected:
 	void darken();
 	void focusChanged(ScreenFocusChange focusChange) override;

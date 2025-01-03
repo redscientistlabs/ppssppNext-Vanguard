@@ -84,6 +84,8 @@
 #include "Windows/WindowsHost.h"
 #include "Windows/main.h"
 
+#include "Windows/Vanguard/VanguardHelpers.h" // RTC_Hijack
+
 
 // Nvidia OpenGL drivers >= v302 will check if the application exports a global
 // variable named NvOptimusEnablement to know if it should run the app in high
@@ -1066,6 +1068,16 @@ int WINAPI WinMain(HINSTANCE _hInstance, HINSTANCE hPrevInstance, LPSTR szCmdLin
 	// manages its own render thread.
 	MainThread_Start(g_Config.iGPUBackend == (int)GPUBackend::OPENGL);
 	InputDevice::BeginPolling();
+
+	// RTC_Hijack: get the emulator directory and call the initialize Vanguard function
+	std::string emuDir = getDirectory();
+	CallImportedFunction<void>((char*)"InitVanguard", emuDir);
+
+	for (size_t i = 1; i < wideArgs.size(); ++i)
+	{
+		if (wideArgs[i] == L"-CONSOLE")
+			CallImportedFunction<void>((char*)"SHOWCONSOLE");
+	}
 
 	HACCEL hAccelTable = LoadAccelerators(_hInstance, (LPCTSTR)IDR_ACCELS);
 	HACCEL hDebugAccelTable = LoadAccelerators(_hInstance, (LPCTSTR)IDR_DEBUGACCELS);

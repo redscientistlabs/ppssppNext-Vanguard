@@ -283,6 +283,7 @@
     <ClCompile Include="Debugger\EditSymbolsWindow.cpp">
       <Filter>Windows\Debugger</Filter>
     </ClCompile>
+    <ClCompile Include="Vanguard\VanguardHelpers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debugger\CtrlDisAsmView.h">
@@ -583,6 +584,8 @@
     <ClInclude Include="..\UI\DarwinFileSystemServices.h">
       <Filter>Other Platforms\iOS</Filter>
     </ClInclude>
+    <ClInclude Include="Vanguard\VanguardClientInitializer.h" />
+    <ClInclude Include="Vanguard\VanguardHelpers.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="icon1.ico">
@@ -821,6 +824,7 @@
     <None Include="..\UI\DarwinFileSystemServices.mm">
       <Filter>Other Platforms\iOS</Filter>
     </None>
+    <None Include="Vanguard\VanguardSpec.json" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ppsspp.rc">
