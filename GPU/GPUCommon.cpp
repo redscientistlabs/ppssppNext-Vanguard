@@ -722,10 +722,6 @@ void GPUCommon::PSPFrame() {
 	GPURecord::NotifyBeginFrame();
 }
 
-bool GPUCommon::PresentedThisFrame() const {
-	return framebufferManager_ ? framebufferManager_->PresentedThisFrame() : true;
-}
-
 void GPUCommon::SlowRunLoop(DisplayList &list) {
 	const bool dumpThisFrame = dumpThisFrame_;
 	while (downcount > 0) {
@@ -1281,16 +1277,26 @@ void GPUCommon::FlushImm() {
 	if (immCount_ == 0 || immPrim_ == GE_PRIM_INVALID)
 		return;
 
-	SetDrawType(DRAW_PRIM, immPrim_);
-	VirtualFramebuffer *vfb = nullptr;
-	if (framebufferManager_)
-		vfb = framebufferManager_->SetRenderFrameBuffer(gstate_c.IsDirty(DIRTY_FRAMEBUF), gstate_c.skipDrawReason);
 	if (gstate_c.skipDrawReason & (SKIPDRAW_SKIPFRAME | SKIPDRAW_NON_DISPLAYED_FB)) {
 		// No idea how many cycles to skip, heh.
 		immCount_ = 0;
 		return;
 	}
+
+	// Ignore immediate point primitives with a X/Y of 0.
+	// These are accidentally created when games clear the graphics state.
+	if (immCount_ == 1 && immPrim_ == GE_PRIM_POINTS && immBuffer_[0].x == 0 && immBuffer_[0].y == 0 && immBuffer_[0].z == 0 && immBuffer_[0].color0_32 == 0) {
+		immCount_ = 0;
+		return;
+	}
+
+	SetDrawType(DRAW_PRIM, immPrim_);
+
 	gstate_c.UpdateUVScaleOffset();
+
+	VirtualFramebuffer *vfb = nullptr;
+	if (framebufferManager_)
+		vfb = framebufferManager_->SetRenderFrameBuffer(gstate_c.IsDirty(DIRTY_FRAMEBUF), gstate_c.skipDrawReason);
 	if (vfb) {
 		CheckDepthUsage(vfb);
 	}
@@ -1343,8 +1349,7 @@ void GPUCommon::FlushImm() {
 }
 
 void GPUCommon::Execute_Unknown(u32 op, u32 diff) {
-	if ((op & 0xFFFFFF) != 0)
-		WARN_LOG_REPORT_ONCE(unknowncmd, Log::G3D, "Unknown GE command : %08x ", op);
+	// Do nothing. We used to report here, but we're confident we have them all so no need to report unknown.
 }
 
 void GPUCommon::FastLoadBoneMatrix(u32 target) {
@@ -1861,6 +1866,18 @@ void GPUCommon::DoBlockTransfer(u32 skipDrawReason) {
 }
 
 bool GPUCommon::PerformMemoryCopy(u32 dest, u32 src, int size, GPUCopyFlag flags) {
+	/*
+	// TODO: Should add this. But let's do it after the 1.18 release.
+	if (dest == 0 || src == 0) {
+		_dbg_assert_msg_(false, "Bad PerformMemoryCopy: %08x -> %08x, size %d (flag: %d)", src, dest, size, (int)flags);
+		return false;
+	}
+	*/
+	if (size == 0) {
+		_dbg_assert_msg_(false, "Zero-sized PerformMemoryCopy: %08x -> %08x, size %d (flag: %d)", src, dest, size, (int)flags);
+		// Let's not ignore this yet but if we hit this, we should investigate.
+	}
+
 	// Track stray copies of a framebuffer in RAM. MotoGP does this.
 	if (framebufferManager_->MayIntersectFramebufferColor(src) || framebufferManager_->MayIntersectFramebufferColor(dest)) {
 		if (!framebufferManager_->NotifyFramebufferCopy(src, dest, size, flags, gstate_c.skipDrawReason)) {
