@@ -588,7 +588,7 @@ void PSP_Shutdown() {
 
 	//RTC_Hijack: call Vanguard function
 	//Make sure we don't send it if we're shutting the emulator down, otherwise it will hang
-	if(coreState != CORE_POWERDOWN)
+	if(GetUIState() != UISTATE_EXIT)
 		CallImportedFunction<void>((char*)"GAMECLOSED");
 }
 
