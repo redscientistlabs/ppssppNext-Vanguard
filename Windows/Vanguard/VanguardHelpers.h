@@ -28,12 +28,15 @@ EXPORT void Vanguard_prepShutdown();
 
 EXPORT void Vanguard_forceStop();
 
+EXPORT char* Vanguard_getSystemCore();
+
 class VanguardClient
 {
 public:
   static bool loading;
   static bool ok_to_corestep;
   inline static bool pauseUntilCorrupt;
+  static std::string system_core;
 };
 
 inline HINSTANCE vanguard = LoadLibraryA("../RTCV/VanguardHook.dll");

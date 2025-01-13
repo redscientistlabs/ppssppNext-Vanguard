@@ -283,6 +283,9 @@ void EmuScreen::bootGame(const Path &filename) {
 	// RTC_Hijack: call Vanguard function
 	CallImportedFunction<void>((char*)"LOADGAMESTART", filename.c_str());
 
+	// RTC_Hijack
+	VanguardClient::system_core = "PSP";
+
 	auto sc = GetI18NCategory(I18NCat::SCREEN);
 	if (info->fileType == IdentifiedFileType::PSP_DISC_DIRECTORY) {
 		// Check for existence of ppsspp-index.lst - if it exists, the user likely knows what they're doing.

@@ -141,6 +141,12 @@ void Vanguard_forceStop()
 	System_ExitApp();
 }
 
+std::string VanguardClient::system_core = "EMPTY";
+char* Vanguard_getSystemCore()
+{
+	return VanguardClient::system_core.data();
+}
+
 //converts a BSTR received from the Vanguard client to std::string
 std::string BSTRToString(BSTR string)
 {
