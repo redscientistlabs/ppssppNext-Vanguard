@@ -2,7 +2,6 @@
 
 #include <wtypes.h>
 #include <comdef.h>
-//#include <codecvt>
 
 #define EXPORT extern "C" __declspec(dllexport)
 
@@ -29,6 +28,10 @@ EXPORT void Vanguard_prepShutdown();
 EXPORT void Vanguard_forceStop();
 
 EXPORT char* Vanguard_getSystemCore();
+
+EXPORT char* Vanguard_saveEmuSettings();
+
+EXPORT void Vanguard_loadEmuSettings(BSTR settings);
 
 class VanguardClient
 {

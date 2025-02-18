@@ -96,7 +96,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -443,7 +443,8 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <AdditionalOptions>$(EXTERNAL_COMPILE_OPTIONS)</AdditionalOptions>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <AdditionalDependencies>dwmapi.lib;winhttp.lib;uxtheme.lib;mf.lib;mfplat.lib;mfreadwrite.lib;mfuuid.lib;shlwapi.lib;Winmm.lib;Ws2_32.lib;dsound.lib;comctl32.lib;d3d9.lib;dxguid.lib;avcodec.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -907,6 +908,7 @@
     <ClCompile Include="TouchInputHandler.cpp" />
     <ClCompile Include="GPU\WindowsVulkanContext.cpp" />
     <ClCompile Include="Vanguard\VanguardHelpers.cpp" />
+    <ClCompile Include="Vanguard\VanguardJsonParser.cpp" />
     <ClCompile Include="W32Util\ContextMenu.cpp" />
     <ClCompile Include="W32Util\DarkMode.cpp" />
     <ClCompile Include="W32Util\DialogManager.cpp" />
@@ -1462,7 +1464,9 @@
     <ClInclude Include="TouchInputHandler.h" />
     <ClInclude Include="GPU\WindowsVulkanContext.h" />
     <ClInclude Include="Vanguard\VanguardClientInitializer.h" />
+    <ClInclude Include="Vanguard\VanguardEmuSettings.h" />
     <ClInclude Include="Vanguard\VanguardHelpers.h" />
+    <ClInclude Include="Vanguard\VanguardJsonParser.h" />
     <ClInclude Include="W32Util\ContextMenu.h" />
     <ClInclude Include="W32Util\DarkMode.h" />
     <ClInclude Include="W32Util\DialogManager.h" />

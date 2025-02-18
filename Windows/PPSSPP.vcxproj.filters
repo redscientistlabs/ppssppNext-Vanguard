@@ -284,6 +284,7 @@
       <Filter>Windows\Debugger</Filter>
     </ClCompile>
     <ClCompile Include="Vanguard\VanguardHelpers.cpp" />
+    <ClCompile Include="Vanguard\VanguardJsonParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debugger\CtrlDisAsmView.h">
@@ -586,6 +587,8 @@
     </ClInclude>
     <ClInclude Include="Vanguard\VanguardClientInitializer.h" />
     <ClInclude Include="Vanguard\VanguardHelpers.h" />
+    <ClInclude Include="Vanguard\VanguardEmuSettings.h" />
+    <ClInclude Include="Vanguard\VanguardJsonParser.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="icon1.ico">
