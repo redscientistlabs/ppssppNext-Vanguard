@@ -1005,7 +1005,9 @@ void GameSettingsScreen::CreateToolsSettings(UI::ViewGroup *tools) {
 
 	tools->Add(new ItemHeader(ms->T("Tools")));
 
-	const bool showRetroAchievements = true; // System_GetPropertyInt(SYSPROP_DEVICE_TYPE) != DEVICE_TYPE_VR;
+	// RTC_Hijack: nuke retro achievements
+	//const bool showRetroAchievements = true; // System_GetPropertyInt(SYSPROP_DEVICE_TYPE) != DEVICE_TYPE_VR;
+	const bool showRetroAchievements = false; // System_GetPropertyInt(SYSPROP_DEVICE_TYPE) != DEVICE_TYPE_VR;
 	if (showRetroAchievements) {
 		auto retro = tools->Add(new Choice(sy->T("RetroAchievements")));
 		retro->OnClick.Add([=](UI::EventParams &) -> UI::EventReturn {
