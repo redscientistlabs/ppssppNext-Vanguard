@@ -77,7 +77,7 @@ bool PSP_IsIniting();
 bool PSP_IsInited();
 bool PSP_IsRebooting();
 bool PSP_IsQuitting();
-void PSP_Shutdown();
+void PSP_Shutdown(bool send_game_closed = true); // RTC_Hijack: add input parameter to check if game closed signal should be sent
 bool PSP_Reboot(std::string *error_string);
 
 void PSP_BeginHostFrame();

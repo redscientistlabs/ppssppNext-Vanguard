@@ -552,7 +552,7 @@ bool PSP_IsQuitting() {
 	return pspIsQuitting;
 }
 
-void PSP_Shutdown() {
+void PSP_Shutdown(bool send_game_closed) {
 	// Reduce the risk for weird races with the Windows GE debugger.
 	gpuDebug = nullptr;
 
@@ -587,8 +587,8 @@ void PSP_Shutdown() {
 	Core_NotifyLifecycle(CoreLifecycle::STOPPED);
 
 	//RTC_Hijack: call Vanguard function
-	//Make sure we don't send it if we're shutting the emulator down, otherwise it will hang
-	if(GetUIState() != UISTATE_EXIT)
+	//Make sure we don't send it if we're shutting the emulator down or resetting the game
+	if(GetUIState() != UISTATE_EXIT && send_game_closed)
 		CallImportedFunction<void>((char*)"GAMECLOSED");
 }
 

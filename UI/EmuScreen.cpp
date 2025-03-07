@@ -543,7 +543,7 @@ void EmuScreen::sendMessage(UIMessage message, const char *value) {
 		invalid_ = true;
 		System_Notify(SystemNotification::DISASSEMBLY);
 	} else if (message == UIMessage::REQUEST_GAME_RESET) {
-		PSP_Shutdown();
+		PSP_Shutdown(false); // RTC_Hijack: don't send the game closed signal when resetting the game
 		bootPending_ = true;
 		invalid_ = true;
 		System_Notify(SystemNotification::DISASSEMBLY);
