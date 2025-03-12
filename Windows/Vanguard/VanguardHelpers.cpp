@@ -67,7 +67,7 @@ void Vanguard_resume()
 
 void Vanguard_savesavestate(BSTR filename, bool wait)
 {
-    if (coreState == CORE_RUNNING)
+    if (coreState == CORE_RUNNING || coreState == CORE_STEPPING)
     {
 		//Convert the BSTR sent by Vanguard to std::string
 		std::string filename_converted = BSTRToString(filename);
@@ -85,6 +85,9 @@ void Vanguard_loadsavestate(BSTR filename)
 	  System_PostUIMessage(UIMessage::REQUEST_GAME_RESET);
 
   SaveState::Load(Path(filename_converted), -1);
+
+  if (coreState == CORE_STEPPING)
+	Core_UpdateState(CORE_RUNNING);
 }
 
 
