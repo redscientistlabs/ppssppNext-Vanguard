@@ -2,6 +2,7 @@
 
 #include <wtypes.h>
 #include <comdef.h>
+#include <string>
 
 #define EXPORT extern "C" __declspec(dllexport)
 
@@ -38,7 +39,7 @@ class VanguardClient
 public:
   static bool loading;
   static bool ok_to_corestep;
-  inline static bool pauseUntilCorrupt;
+  static bool pauseUntilCorrupt;
   static std::string system_core;
 };
 

@@ -907,6 +907,7 @@
     <ClCompile Include="RawInput.cpp" />
     <ClCompile Include="TouchInputHandler.cpp" />
     <ClCompile Include="GPU\WindowsVulkanContext.cpp" />
+    <ClCompile Include="Vanguard\VanguardClient.cpp" />
     <ClCompile Include="Vanguard\VanguardHelpers.cpp" />
     <ClCompile Include="Vanguard\VanguardJsonParser.cpp" />
     <ClCompile Include="W32Util\ContextMenu.cpp" />

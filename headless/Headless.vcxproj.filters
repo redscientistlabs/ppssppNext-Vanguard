@@ -29,6 +29,7 @@
       <Filter>Windows</Filter>
     </ClCompile>
     <ClCompile Include="HeadlessHost.cpp" />
+    <ClCompile Include="..\Windows\Vanguard\VanguardClient.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="headless.txt" />

@@ -463,6 +463,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\Windows\GPU\WindowsVulkanContext.cpp" />
+    <ClCompile Include="..\Windows\Vanguard\VanguardClient.cpp" />
     <ClCompile Include="..\Windows\W32Util\Misc.cpp" />
     <ClCompile Include="Compare.cpp" />
     <ClCompile Include="Headless.cpp">

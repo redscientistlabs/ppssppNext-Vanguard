@@ -51,7 +51,6 @@ void Vanguard_pokebyte(long long addr, unsigned char val, int selection)
 
 }
 
-bool VanguardClient::ok_to_corestep = true;
 void Vanguard_pause(bool pauseUntilCorrupt)
 {
 	Core_UpdateState(CORE_STEPPING);
@@ -95,7 +94,6 @@ void Vanguard_loadsavestate(BSTR filename)
 }
 
 
-bool VanguardClient::loading = false;
 void Vanguard_loadROM(BSTR filename)
 {
   VanguardClient::loading = true;
@@ -154,7 +152,6 @@ void Vanguard_forceStop()
 	System_ExitApp();
 }
 
-std::string VanguardClient::system_core = "EMPTY";
 char* Vanguard_getSystemCore()
 {
 	// store the output as a string, then convert it to char*

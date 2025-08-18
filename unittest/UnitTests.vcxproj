@@ -386,6 +386,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\Windows\CaptureDevice.cpp" />
+    <ClCompile Include="..\Windows\Vanguard\VanguardClient.cpp" />
     <ClCompile Include="JitHarness.cpp" />
     <ClCompile Include="TestArm64Emitter.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
