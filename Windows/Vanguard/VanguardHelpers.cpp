@@ -53,14 +53,16 @@ void Vanguard_pokebyte(long long addr, unsigned char val, int selection)
 
 void Vanguard_pause(bool pauseUntilCorrupt)
 {
-	Core_UpdateState(CORE_STEPPING);
+	Core_EnableStepping(true, "ui.break");
 	VanguardClient::ok_to_corestep = false;
+	VanguardClient::pauseUntilCorrupt = pauseUntilCorrupt;
 }
 
 void Vanguard_resume()
 {
-	Core_UpdateState(CORE_RUNNING);
+	Core_EnableStepping(false, "ui.break");
 	VanguardClient::ok_to_corestep = true;
+	VanguardClient::pauseUntilCorrupt = false;
 }
 
 
@@ -77,7 +79,7 @@ void Vanguard_savesavestate(BSTR filename, bool wait)
 
 void Vanguard_loadsavestate(BSTR filename)
 {
-  Vanguard_pause();
+  Vanguard_pause(VanguardClient::pauseUntilCorrupt);
 
   // Convert the BSTR sent by Vanguard to std::string
   std::string filename_converted = BSTRToString(filename);
@@ -90,7 +92,10 @@ void Vanguard_loadsavestate(BSTR filename)
   // For some reason loading savestates happen on the next frame, so we need to do it here before RTC tries to send pokebytes
   Core_ProcessStepping();
 
-  Vanguard_resume();
+  if (!VanguardClient::pauseUntilCorrupt)
+  {
+	  Vanguard_resume();
+  }
 }
 
 
