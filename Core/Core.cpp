@@ -225,10 +225,6 @@ void Core_RunLoop(GraphicsContext *ctx) {
 		return;
 	}
 
-	// RTC_Hijack: call Vanguard function
-	if (VanguardClient::ok_to_corestep)
-		CallImportedFunction<void>((char*)"CORESTEP");
-
 	NativeFrame(ctx);
 }
 
@@ -362,6 +358,13 @@ void Core_EnableStepping(bool step, const char *reason, u32 relatedAddress) {
 bool Core_NextFrame() {
 	if (coreState == CORE_RUNNING) {
 		coreState = CORE_NEXTFRAME;
+
+		// RTC_Hijack: call Vanguard function
+		if (VanguardClient::ok_to_corestep)
+		{
+			CallImportedFunction<void>((char*)"CORESTEP");
+		}
+
 		return true;
 	} else {
 		return false;
