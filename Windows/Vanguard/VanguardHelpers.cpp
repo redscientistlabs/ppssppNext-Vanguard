@@ -89,9 +89,6 @@ void Vanguard_loadsavestate(BSTR filename)
 
   SaveState::Load(Path(filename_converted), -1);
 
-  // For some reason loading savestates happen on the next frame, so we need to do it here before RTC tries to send pokebytes
-  Core_ProcessStepping();
-
   if (!VanguardClient::pauseUntilCorrupt)
   {
 	  Vanguard_resume();

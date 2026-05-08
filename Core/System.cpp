@@ -586,8 +586,8 @@ void PSP_Shutdown(bool send_game_closed) {
 	g_Config.unloadGameConfig();
 	Core_NotifyLifecycle(CoreLifecycle::STOPPED);
 
-	//RTC_Hijack: call Vanguard function
-	//Make sure we don't send it if we're shutting the emulator down or resetting the game
+	// RTC_Hijack: call Vanguard function
+	// Make sure we don't send it if we're shutting the emulator down or resetting the game
 	if(GetUIState() != UISTATE_EXIT && send_game_closed)
 		CallImportedFunction<void>((char*)"GAMECLOSED");
 }
