@@ -105,15 +105,14 @@ void Vanguard_loadROM(BSTR filename)
   VanguardClient::ok_to_corestep = false;
 
   std::string converted_filename = BSTRToString(filename);
-
   switch (GetUIState())
   {
 	case UISTATE_MENU:
-		VanguardClientInitializer::win->MainScreen::sendMessage(UIMessage::REQUEST_GAME_BOOT, converted_filename.c_str());
+		System_PostUIMessage(UIMessage::REQUEST_GAME_BOOT, converted_filename.c_str());
 		break;
 	default:
 		PSP_Shutdown();
-		VanguardClientInitializer::win->MainScreen::sendMessage(UIMessage::REQUEST_GAME_BOOT, converted_filename.c_str());
+		System_PostUIMessage(UIMessage::REQUEST_GAME_BOOT, converted_filename.c_str());
 		break;
   }
 
