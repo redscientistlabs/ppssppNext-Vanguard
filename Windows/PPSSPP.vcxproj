@@ -457,6 +457,10 @@
     <ResourceCompile>
       <PreprocessorDefinitions>$(EXTERNAL_RC_DEFINITIONS);_VC80_UPGRADE=0x0710;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
+    <PostBuildEvent>
+      <Command>xcopy /y $(ProjectDir)Vanguard\VanguardConfig.json $(OutDir)
+xcopy /y $(ProjectDir)Vanguard\VanguardBlacklistedDomains.json $(OutDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <Midl />

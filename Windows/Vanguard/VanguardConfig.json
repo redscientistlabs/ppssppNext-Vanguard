@@ -1,0 +1,74 @@
+{
+  "VSpecConfig": {
+    "EmuEXE": "PPSSPPWindows64.exe",
+    "NAME": "PPSSPP",
+    "PROFILE": "PPSSPP",
+    "OVERRIDE_DEFAULTMAXINTENSITY": 500000,
+    "SUPPORTS_RENDERING": false,
+    "SUPPORTS_CONFIG_MANAGEMENT": true,
+    "SUPPORTS_CONFIG_HANDOFF": true,
+    "SUPPORTS_KILLSWITCH": true,
+    "SUPPORTS_REALTIME": true,
+    "SUPPORTS_SAVESTATES": true,
+    "SUPPORTS_REFERENCES": true,
+    "SUPPORTS_MIXED_STOCKPILE": false,
+    "CORE_DISKBASED": false
+  },
+  "MemoryDomainConfig": [
+    {
+      "Name": "Scratchpad",
+      "Profiles": [
+        "PSP"
+      ],
+      "BigEndian": false,
+      "Size": "0x00004000",
+      "WordSize": 4,
+      "Offset": "0x00010000",
+      "PeekPokeSel": 0
+    },
+    {
+      "Name": "VRAM",
+      "Profiles": [
+        "PSP"
+      ],
+      "BigEndian": false,
+      "Size": "0x00200000",
+      "WordSize": 4,
+      "Offset": "0x04000000",
+      "PeekPokeSel": 0
+    },
+    {
+      "Name": "Physical RAM (First Half)",
+      "Profiles": [
+        "PSP"
+      ],
+      "BigEndian": false,
+      "Size": "0x02000000",
+      "WordSize": 4,
+      "Offset": "0x08000000",
+      "PeekPokeSel": 0
+    },
+    {
+      "Name": "Physical RAM (Second Half)",
+      "Profiles": [
+        "PSP"
+      ],
+      "BigEndian": false,
+      "Size": "0x02000000",
+      "WordSize": 4,
+      "Offset": "0x0A000000",
+      "PeekPokeSel": 0
+    },
+    {
+      "Name": "Kernel RAM",
+      "Profiles": [
+        "PSP"
+      ],
+      "BigEndian": false,
+      "Size": "0x04000000",
+      "WordSize": 4,
+      "Offset": "0x88000000",
+      "PeekPokeSel": 0
+    }
+  ]
+}

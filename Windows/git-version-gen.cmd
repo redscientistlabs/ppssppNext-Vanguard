@@ -148,6 +148,9 @@ if /i "%GIT_VERSION:~0,1%" == "v" (
 	for /f "tokens=1 delims=-" %%a in ("%GIT_VERSION:~1%") do set WIN_RELEASE_VERSION=%%a
 	for /f "tokens=2 delims=-" %%a in ("%GIT_VERSION%") do set WIN_BUILD_NUMBER=%%a
 	set WIN_VERSION_COMMA=!WIN_RELEASE_VERSION:.=,!,!WIN_BUILD_NUMBER!
+) else if /i "%GIT_VERSION:~2,1%" == "X" (
+	rem // Vanguard release tag
+	set WIN_VERSION_COMMA=%GIT_VERSION:~0,2%
 ) else (
 	rem // Normal commits
 	set WIN_VERSION_COMMA=0,0,0x%GIT_VERSION:~0,4%,0x%GIT_VERSION:~4,4%
